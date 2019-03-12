@@ -7,28 +7,28 @@ Its is written very badly in python.
 
 Work in progress.
 
-'''bash
+```bash
 git clone https://github.com/lightatzero/gbpx.git
 sudo apt-get install python3-pip
 sudo pip3 install virtualenv
 virtualenv venv
 source venv/bin/activate
 pip install sphinx
-'''
+```
 
 ## Usage
 
-'''bash
+```bash
 ./exchangeScraper.py &
 cat gbp*
-'''
+```
 
 ## Build Documentation 
 
-'''bash
+```bash
 cd docs
 make html
-'''
+```
 
 Open the following in a browser:
 gbpx/docs/_build/html/index.html 
