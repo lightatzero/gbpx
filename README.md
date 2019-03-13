@@ -23,6 +23,18 @@ pip install sphinx
 cat gbp*
 ```
 
+## Tests
+
+Run all tests
+```bash
+python -m unittest discover
+```
+
+Run a single Tests
+```bash
+python -m unittest test.testversion
+```
+
 ## Build Documentation 
 
 ```bash

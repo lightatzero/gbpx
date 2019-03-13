@@ -25,6 +25,9 @@ gbpToCurrency = [
 "rub",
 ]
 
+def getVersion():
+    return '1.0'
+
 def getTimeStampString():
     ret =   datetime.datetime.now(\
             datetime.timezone.utc).strftime(\
@@ -60,13 +63,14 @@ def getValueFromInvestingDotCom(exchange):
     ret = float(re.findall("\d+\.\d+",ret)[0])
     writeCsv(exchange,ret)
 
-while True:
-    threads = []
-    for exchange in gbpToCurrency:
-        t = Thread(target=getValueFromInvestingDotCom,args=(exchange,))
-        threads.append(t)
-    for x in threads:
-        x.start()
-    for x in threads:
-        x.join()
-    sleep(60*5)
+if __name__ == "__main__":
+    while True:
+        threads = []
+        for exchange in gbpToCurrency:
+            t = Thread(target=getValueFromInvestingDotCom,args=(exchange,))
+            threads.append(t)
+        for x in threads:
+            x.start()
+        for x in threads:
+            x.join()
+        sleep(60*5)
