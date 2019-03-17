@@ -14,12 +14,13 @@ sudo pip3 install virtualenv
 virtualenv venv
 source venv/bin/activate
 pip install sphinx
+pip install flake8
 ```
 
 ## Usage
 
 ```bash
-./exchangeScraper.py &
+./gbpx.py &
 cat gbp*
 ```
 
@@ -32,8 +33,16 @@ python -m unittest discover
 
 Run a single Tests
 ```bash
-python -m unittest test.testversion
+python -m unittest test.testunits
 ```
+
+## Linting
+
+Check style
+```bash
+flake8 *.py test/*.py
+```
+
 
 ## Build Documentation 
 
