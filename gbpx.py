@@ -82,3 +82,40 @@ class Scrapper():
         conn.commit()
         conn.close()
         return table_there
+
+
+if __name__ == '__main__':
+    scrapper = Scrapper()
+    scrapper.urls = [
+                    "https://uk.investing.com/currencies/gbp-eur",
+                    "https://uk.investing.com/currencies/gbp-mxn",
+                    "https://uk.investing.com/currencies/gbp-usd",
+                    "https://uk.investing.com/currencies/gbp-chf",
+                    "https://uk.investing.com/currencies/gbp-aud",
+                    "https://uk.investing.com/currencies/gbp-cad",
+                    "https://uk.investing.com/currencies/gbp-nzd",
+                    "https://uk.investing.com/currencies/gbp-cny",
+                    "https://uk.investing.com/currencies/gbp-inr",
+                    "https://uk.investing.com/currencies/gbp-idr",
+                    "https://uk.investing.com/currencies/gbp-brl",
+                    "https://uk.investing.com/currencies/gbp-pkr",
+                    "https://uk.investing.com/currencies/gbp-ngn",
+                    "https://uk.investing.com/currencies/gbp-bdt",
+                    "https://uk.investing.com/currencies/gbp-rub",
+                    ]
+    if scrapper.check_table():
+        pass
+    else:
+        scrapper.create_table()
+    while True:
+        scrapper.five_minute_interval()
+        date_time = scrapper.get_timestamp_rfc_3339()
+        values = {}
+        for url in scrapper.urls:
+            data = scrapper.get_html(url)
+            values.update(scrapper.data_from_uk_investing_com(data))
+        for name, value in values.items():
+            scrapper.put_data_in_table(
+                    date_time,
+                    name,
+                    value,)
