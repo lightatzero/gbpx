@@ -19,6 +19,7 @@ pip install flake8
 
 ## Usage
 
+Todo
 ```bash
 ./gbpx.py &
 cat gbp*

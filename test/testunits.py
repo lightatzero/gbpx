@@ -5,6 +5,7 @@ import http.server
 import socketserver
 import threading
 import gbpx
+from datetime import datetime
 
 
 def start_test_server():
@@ -72,6 +73,46 @@ class UnitTests(unittest.TestCase):
                 1.3299,
                 "Did not parse data properly")
         stop_test_server(server)
+
+    def test_get_timestamp_rfc_3339(self):
+        """
+        Test that the get_timestamp_rfc_3339 function is working
+        """
+        then_string = self.Scrapper.get_timestamp_rfc_3339()
+        then = datetime.strptime(
+                then_string.split("+")[0],
+                '%Y-%m-%dT%H:%M:%S.%f')
+        now = datetime.now()
+        difference = now - then
+        self.assertTrue(
+                difference.total_seconds() <= 5.00,
+                "Did not get time properly")
+
+    def test_tables(self):
+        """
+        Test that the sql tables are function is working
+        """
+        self.Scrapper.table_name = "test_table"
+        self.assertTrue(
+                self.Scrapper.create_table(),
+                "Table not created properly"
+                )
+        self.assertTrue(
+                self.Scrapper.check_table(),
+                "Table not checked properly."
+                )
+        self.assertTrue(
+                self.Scrapper.put_data_in_table("x", "y", 1.0),
+                "Table not populated properly."
+                )
+        self.assertTrue(
+                self.Scrapper.remove_table(),
+                "Table not removed properly."
+                )
+        self.assertFalse(
+                self.Scrapper.check_table(),
+                "Table not checked properly."
+                )
 
 
 if __name__ == '__main__':
