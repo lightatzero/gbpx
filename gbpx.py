@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from urllib.request import urlopen, Request
 from datetime import datetime, timezone
