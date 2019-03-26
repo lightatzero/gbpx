@@ -102,6 +102,8 @@ if __name__ == '__main__':
                     "https://uk.investing.com/currencies/gbp-ngn",
                     "https://uk.investing.com/currencies/gbp-bdt",
                     "https://uk.investing.com/currencies/gbp-rub",
+                    "https://uk.investing.com/currencies/gbp-jpy",
+                    "https://uk.investing.com/currencies/gbp-sek",
                     ]
     if scrapper.check_table():
         pass
