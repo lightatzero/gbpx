@@ -27,7 +27,8 @@ class Scrapper():
         raw = data[1]
         name = re.findall("gbp-[A-Za-z]+", url)[0]
         sub_string = str(re.findall(b"last_last.*>", raw)[0])
-        value = float(re.findall(r"\d+\.\d+", sub_string)[0])
+        value = re.findall(r'\d|\.', sub_string)
+        value = float(''.join(value))
         return {name: value}
 
     def get_timestamp_rfc_3339(self,):

@@ -74,6 +74,20 @@ class UnitTests(unittest.TestCase):
                 "Did not parse data properly")
         stop_test_server(server)
 
+    def test_data_from_uk_investing_com_parser_fix(self):
+        """
+        Test that the data_from_uk_investing_com function is working
+        """
+        server = start_test_server()
+        url = "http://localhost:8000/test/uk.investing.com.gbp-idr.html"
+        data = self.Scrapper.get_html(url)
+        values = self.Scrapper.data_from_uk_investing_com(data)
+        self.assertEqual(
+                values['gbp-idr'],
+                18716.4,
+                "Did not parse data properly")
+        stop_test_server(server)
+
     def test_get_timestamp_rfc_3339(self):
         """
         Test that the get_timestamp_rfc_3339 function is working
