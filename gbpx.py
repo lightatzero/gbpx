@@ -69,6 +69,18 @@ class Scrapper():
         conn.close()
         return True
 
+    def get_day_data_from_table(self, day, symbol):
+        conn = sqlite3.connect(self.db_name)
+        c = conn.cursor()
+        fetched = c.execute(
+                '''SELECT * from {}
+                WHERE datetime BETWEEN (?) and (?)
+                and symbol = (?) '''.format(self.table_name),
+                (day+'T00',day+'T24', symbol))
+        data = fetched.fetchall()
+        conn.commit()
+        conn.close()
+        return data
     def check_table(self,):
         conn = sqlite3.connect(self.db_name)
         c = conn.cursor()

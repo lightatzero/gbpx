@@ -128,6 +128,19 @@ class UnitTests(unittest.TestCase):
                 "Table not checked properly."
                 )
 
+    def test_get_day_data_from_table(self):
+        """
+        We get data from SQL tables.
+        """
+        self.Scrapper.db_name    = "test/test_database.db"
+        self.Scrapper.table_name = "ukinvesting"
+        data = self.Scrapper.get_day_data_from_table(
+                '2019-03-13','gbp-usd')
+        self.assertEqual(
+                len(data),
+                273,
+                "Failed at get day data"
+                )
 
 if __name__ == '__main__':
     unittest.main()
